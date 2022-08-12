@@ -7,6 +7,9 @@ import webbrowser
 from googlesearch import search
 import sqlite3
 import pandas as pd
+import speedtest
+import math
+
 
 app = typer.Typer()
 load_dotenv('.env')
@@ -28,9 +31,20 @@ class Gsearch_python:
          #print (count)
          print(i + '\n')
 
+st = speedtest.Speedtest()
+
 @app.command()
 def hi():
     print(f"Hello Kandy!")
+
+@app.command()
+def testspeed():
+    print("Calculating download speed...")
+    download = st.download()
+    print("Calculating upload speed...")
+    upload = st.upload()
+    print(f"Download: {math.floor(download/1000000)} Mb/s")
+    print(f"Upload: {math.floor(upload/1000000)} Mb/s")
 
 @app.command()
 def weather():
